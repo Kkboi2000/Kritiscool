@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pratice Button functions</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    #image-container {
+      display: none; /* Hide image by default */
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 10px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      color: white;
+    }
+    #yes-button {
+      background-color: #28a745; /* Green color */
+    }
+    #yes-button:hover {
+      background-color: #218838; /* Darker green on hover */
+    }
+    #no-button {
+      background-color: #dc3545; /* Red color */
+    }
+    #no-button:hover {
+      background-color: #c82333; /* Darker red on hover */
+    }
+  </style>
+</head>
+<body>
+  <h1>Question 1</h1>
+  <p>Is Krit cool?</p>
+  <button id="yes-button">Yes</button>
+  <button id="no-button">No</button>
+
+  <div id="image-container">
+    <img src="https://media1.tenor.com/m/672ezc4WbtgAAAAd/exactly-point.gif" alt="Placeholder Image">
+  </div>
+
+  <script>
+    let noClickCount = 0;
+
+    // Handle "Yes" button click
+    document.getElementById('yes-button').addEventListener('click', function() {
+      document.getElementById('image-container').style.display = 'block'; // Show image
+    });
+
+    // Handle "No" button click
+    document.getElementById('no-button').addEventListener('click', function() {
+      noClickCount++;
+      const yesButton = document.getElementById('yes-button');
+      const noButton = document.getElementById('no-button');
+
+      if (noClickCount === 1) {
+        alert('Try again!'); // First click: Alert "Try again!"
+      } else if (noClickCount === 2) {
+        yesButton.style.fontSize = '30px'; 
+      } else if (noClickCount === 3) {
+        yesButton.style.fontSize = '40px'; 
+      } else if (noClickCount === 4) {
+        noButton.textContent = 'Yes'; 
+        noButton.addEventListener('click', function() {
+          document.getElementById('image-container').style.display = 'block';
+        });
+      }
+    });
+  </script>
+</body>
+</html>
