@@ -1,79 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pratice Button functions</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin-top: 50px;
-    }
-    #image-container {
-      display: none; /* Hide image by default */
-      margin-top: 20px;
-    }
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      margin: 10px;
-      cursor: pointer;
-      border: none;
-      border-radius: 5px;
-      color: white;
-    }
-    #yes-button {
-      background-color: #28a745; /* Green color */
-    }
-    #yes-button:hover {
-      background-color: #218838; /* Darker green on hover */
-    }
-    #no-button {
-      background-color: #dc3545; /* Red color */
-    }
-    #no-button:hover {
-      background-color: #c82333; /* Darker red on hover */
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do You Think Krit is handsome?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 10%;
+        }
+        button {
+            font-size: 30px;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        #yes {
+            background-color: green;
+            color: white;
+        }
+        #no {
+            background-color: red;
+            color: white;
+        }
+        #result {
+            margin-top: 20px;
+        }
+        .gif-container {
+            margin-bottom: 20px;
+            display: none;
+        }
+    </style>
 </head>
 <body>
-  <h1>Question 1</h1>
-  <p>Is Krit cool?</p>
-  <button id="yes-button">Yes</button>
-  <button id="no-button">No</button>
+    <div id="gifContainer" class="gif-container">
+        <img src="https://gifdb.com/images/high/exactly-gif-file-2294kb-uczfmvkjwktykn2y.webp" alt="Exactly gif" style="max-width: 300px;">
+    </div>
+    <h1>Do you think Krit is handsome?</h1>
+    <button id="yes" onclick="handleYes()">Yes</button>
+    <button id="no" onclick="handleNo()">No</button>
+    <div id="result"></div>
 
-  <div id="image-container">
-    <img src="https://media1.tenor.com/m/672ezc4WbtgAAAAd/exactly-point.gif" alt="Placeholder Image">
-  </div>
+    <script>
+        const yesButton = document.getElementById('yes');
+        const noButton = document.getElementById('no');
+        const resultDiv = document.getElementById('result');
+        const gifContainer = document.getElementById('gifContainer');
+        let noCount = 0;
 
-  <script>
-    let noClickCount = 0;
+        function handleYes() {
+            // Show the gif container
+            gifContainer.style.display = "block";
+            // Hide the no button
+            noButton.style.display = "none";
+        }
 
-    // Handle "Yes" button click
-    document.getElementById('yes-button').addEventListener('click', function() {
-      document.getElementById('image-container').style.display = 'block'; // Show image
-    });
-
-    // Handle "No" button click
-    document.getElementById('no-button').addEventListener('click', function() {
-      noClickCount++;
-      const yesButton = document.getElementById('yes-button');
-      const noButton = document.getElementById('no-button');
-
-      if (noClickCount === 1) {
-        alert('Try again!'); // First click: Alert "Try again!"
-      } else if (noClickCount === 2) {
-        yesButton.style.fontSize = '30px'; 
-      } else if (noClickCount === 3) {
-        yesButton.style.fontSize = '40px'; 
-      } else if (noClickCount === 4) {
-        noButton.textContent = 'Yes'; 
-        noButton.addEventListener('click', function() {
-          document.getElementById('image-container').style.display = 'block';
-        });
-      }
-    });
-  </script>
+        function handleNo() {
+            noCount++;
+            
+            // Move button to random position
+            const maxX = window.innerWidth - noButton.offsetWidth;
+            const maxY = window.innerHeight - noButton.offsetHeight;
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+            
+            noButton.style.position = "absolute";
+            noButton.style.left = randomX + "px";
+            noButton.style.top = randomY + "px";
+            
+            // Disappear after 10 clicks
+            if (noCount >= 10) {
+                noButton.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
